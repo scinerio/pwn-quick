@@ -1,0 +1,27 @@
+version: '3.0'
+services:
+  pwndrop:
+    image: ghcr.io/linuxserver/pwndrop
+    container_name: pwndrop
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/Los_Angeles
+      - SECRET_PATH=/pwndrop
+    volumes:
+      - /path/to/appdata:/config
+    ports:
+      - 8080:8080
+    restart: unless-stopped
+
+  gophish:
+    image: gophish/gophish
+
+  sn1per:
+    image: xerosecurity/sn1per
+  
+    spiderfoot:
+
+  nessus: 
+    image: tenableofficial/nessus
+    

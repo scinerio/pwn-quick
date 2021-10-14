@@ -25,7 +25,15 @@ resource "aws_lightsail_instance" "redbox" {
   blueprint_id      = "amazon_linux_2"
   bundle_id         = "micro_2_0"
   key_pair_name     = "pentest-key"
-  tags = {
-    foo = "bar"
+
+  provisioner "file" {
+        source = "./init_vm.sh"
+        destination = "/tmp/init_vm.sh"
+        connection {
+          type = "ssh"
+          private_key =  "${file("~/.ssh/pentest.pem")}"
+          user = "ubuntu"
+          timeout = "20s"
+      }
   }
 }
